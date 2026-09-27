@@ -42,3 +42,12 @@ function Ballast.reset_hook_stats()
         stat.max = 0
     end
 end
+
+--- Envoie une ligne à l'appelant : console serveur ou console du joueur.
+local function reply(ply, text)
+    if IsValid(ply) then
+        ply:PrintMessage(HUD_PRINTCONSOLE, text)
+    else
+        MsgN(text)
+    end
+end
