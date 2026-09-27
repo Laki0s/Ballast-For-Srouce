@@ -35,3 +35,16 @@ local function record_call(stat, start, ...)
     end
     return ...
 end
+
+--- Enveloppe fn pour mesurer chacun de ses appels.
+local function wrap(event, id, fn)
+    local stat = get_stat(event .. "/" .. tostring(id))
+    local wrapper = function(...)
+        local start = SysTime()
+
+        return record_call(stat, start, fn(...))
+    end
+
+    Ballast.original.hooks[wrapper] = fn
+    return wrapper
+end
