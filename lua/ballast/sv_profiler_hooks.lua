@@ -23,3 +23,15 @@ local function get_stat(key)
     end
     return stat
 end
+
+--- Enregistre la durée d'un appel puis renvoie ses résultats intacts.
+local function record_call(stat, start, ...)
+    local elapsed = SysTime() - start
+
+    stat.total = stat.total + elapsed
+    stat.calls = stat.calls + 1
+    if elapsed > stat.max then
+        stat.max = elapsed
+    end
+    return ...
+end
