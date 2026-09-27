@@ -88,3 +88,13 @@ local function unwrap_existing()
         end
     end
 end
+
+--- Remplace hook.Add en retenant la version courante pour le retour.
+local function install()
+    if hook.Add ~= Ballast.original.hook_profiler then
+        Ballast.original.hook_add = hook.Add
+    end
+    Ballast.original.hook_profiler = profiled_add
+    hook.Add = profiled_add
+    wrap_existing()
+end
