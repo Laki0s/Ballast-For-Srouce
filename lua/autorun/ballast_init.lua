@@ -52,3 +52,5 @@ local function load_file(name)
         include(FOLDER .. name)
     end
 end
+
+load_file("sh_config.lua")
