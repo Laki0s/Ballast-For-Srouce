@@ -101,3 +101,12 @@ local function stop()
     hook.Remove("Think", "Ballast_FrameTime")
     timer.Remove("Ballast_FrameStats")
 end
+
+--- Active ou désactive le module selon la convar ballast_profiler.
+local function set_enabled(enabled)
+    if enabled then
+        start()
+    else
+        stop()
+    end
+end
