@@ -56,3 +56,29 @@ n'est imposé aux joueurs.
 | `ballast_hooks_reset` | console, superadmin | Remise à zéro des mesures des hooks |
 
 Le détail du module 1 est dans [`docs/modules/profiler.md`](docs/modules/profiler.md).
+
+## Développement
+
+Le code suit le **coding style Ballast**, adapté de l'Epitech C Coding
+Style : voir [`docs/CODING_STYLE.md`](docs/CODING_STYLE.md) et
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+```sh
+# Coding style Ballast (script maison)
+find lua tools tests -name '*.lua' | xargs luajit tools/style_check.lua
+
+# glualint (https://github.com/FPtje/GLuaFixer)
+glualint lint --config glualint.json lua tools tests
+
+# Tests, avec l'API GMod simulée
+luajit tests/run.lua tests/test_*.lua
+```
+
+Les trois vérifications tournent aussi dans la CI GitHub Actions.
+
+## Licence
+
+Tous droits réservés : voir [`LICENSE`](LICENSE). L'utilisation sans
+modification sur vos propres serveurs est autorisée ; toute modification ou
+redistribution demande l'accord écrit de Laki0s_, qui reste crédité comme
+auteur original.
