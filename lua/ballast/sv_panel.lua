@@ -23,3 +23,10 @@ local function echo(cat, msg)
         MsgN("[Ballast] " .. cat .. " : " .. msg)
     end
 end
+
+--- Ajoute une entrée en tête du journal, borné à LOG_MAX entrées.
+function Ballast.log(cat, msg)
+    table.insert(Ballast.logs, 1, { t = os.time(), cat = cat, msg = msg })
+    Ballast.logs[LOG_MAX + 1] = nil
+    echo(cat, msg)
+end
