@@ -83,3 +83,26 @@ local function pop_block(state, line)
         table.remove(state.open)
     end
 end
+
+--- Traitement associé à chaque mot-clé qui ouvre ou ferme un bloc.
+local HANDLERS = {
+    ["function"] = push_function,
+    ["if"] = push_control,
+    ["repeat"] = push_control,
+    ["for"] = push_loop,
+    ["while"] = push_loop,
+    ["do"] = push_do,
+    ["elseif"] = check_elseif,
+    ["end"] = pop_block,
+    ["until"] = pop_block,
+}
+
+--- Traite dans l'ordre les mots-clés de bloc d'une ligne de code.
+local function scan_line(state, code, line)
+    state.owners[line] = state.open[#state.open]
+    for pos, word in code:gmatch("()([%a_][%w_]*)") do
+        if HANDLERS[word] then
+            HANDLERS[word](state, line, code, pos)
+        end
+    end
+end
