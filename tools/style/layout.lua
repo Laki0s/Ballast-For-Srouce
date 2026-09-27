@@ -110,3 +110,12 @@ local function check_function(file, info, report)
         end
     end
 end
+
+--- Applique les règles de mise en page à chaque fonction (après blocks).
+function M.check(file, report)
+    for _, info in ipairs(file.functions) do
+        check_function(file, info, report)
+    end
+end
+
+return M
