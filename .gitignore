@@ -1,0 +1,20 @@
+# Binaires et dossier de build : publiés dans les Releases GitHub (C-O1)
+build/
+*.o
+*.obj
+*.dll
+*.so
+
+# Fichiers temporaires d'éditeur (C-O1)
+*~
+\#*#
+*.bak
+*.swp
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Outils locaux (glualint téléchargé à la main)
+glualint
+glualint.exe
