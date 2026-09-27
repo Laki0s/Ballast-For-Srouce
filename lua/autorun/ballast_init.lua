@@ -56,3 +56,4 @@ end
 load_file("sh_config.lua")
 load_file("sh_lang.lua")
 load_file("sv_convars.lua")
+load_file("sv_panel.lua")
