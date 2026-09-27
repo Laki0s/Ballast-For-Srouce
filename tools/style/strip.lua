@@ -32,3 +32,10 @@ local function quoted_end(text, start)
         pos = found + 2
     end
 end
+
+--- Trouve la fin d'un bloc long ]==] de niveau level ouvert à start.
+local function long_end(text, start, level)
+    local _, finish = text:find("]" .. level .. "]", start, true)
+
+    return finish or #text
+end
