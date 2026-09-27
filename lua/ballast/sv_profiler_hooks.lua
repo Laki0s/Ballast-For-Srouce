@@ -48,3 +48,13 @@ local function wrap(event, id, fn)
     Ballast.original.hooks[wrapper] = fn
     return wrapper
 end
+
+--- Remplaçant de hook.Add pendant le mode debug.
+local function profiled_add(event, id, fn)
+    local raw_add = Ballast.original.hook_add
+
+    if type(fn) ~= "function" or Ballast.original.hooks[fn] then
+        return raw_add(event, id, fn)
+    end
+    return raw_add(event, id, wrap(event, id, fn))
+end
