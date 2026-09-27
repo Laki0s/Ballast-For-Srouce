@@ -67,3 +67,13 @@ local function check_rules(file, report, rules, id)
         end
     end
 end
+
+--- Applique toutes les règles de syntaxe au fichier.
+function M.check(file, report)
+    check_rules(file, report, OPERATORS, "C-G")
+    check_rules(file, report, JUMPS, "C-C3")
+    check_rules(file, report, DYNAMIC, "C-G10")
+    check_rules(file, report, COMPACT, "C-L1")
+end
+
+return M
