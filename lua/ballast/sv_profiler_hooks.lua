@@ -77,3 +77,14 @@ local function wrap_existing()
         profiled_add(entry.event, entry.id, entry.fn)
     end
 end
+
+--- Rend à chaque hook enveloppé sa fonction d'origine.
+local function unwrap_existing()
+    local originals = Ballast.original.hooks
+
+    for _, entry in ipairs(list_hooks()) do
+        if originals[entry.fn] then
+            hook.Add(entry.event, entry.id, originals[entry.fn])
+        end
+    end
+end
