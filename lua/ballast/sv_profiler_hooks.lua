@@ -98,3 +98,11 @@ local function install()
     hook.Add = profiled_add
     wrap_existing()
 end
+
+--- Rend hook.Add d'origine, sauf si un autre addon l'a remplacé depuis.
+local function uninstall()
+    if hook.Add == Ballast.original.hook_profiler then
+        hook.Add = Ballast.original.hook_add
+    end
+    unwrap_existing()
+end
