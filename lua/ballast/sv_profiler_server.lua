@@ -37,3 +37,5 @@ local function set_enabled(enabled)
     timer.Create("Ballast_ServerStats", Ballast.config.stats_interval, 0,
         sample)
 end
+
+Ballast.watch_convar("profiler", "Ballast_ServerStats", set_enabled)
