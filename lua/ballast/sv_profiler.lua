@@ -95,3 +95,9 @@ local function start()
     timer.Create("Ballast_FrameStats", config.stats_interval, 0,
         flush_second)
 end
+
+--- Débranche la mesure : retire le hook et le timer.
+local function stop()
+    hook.Remove("Think", "Ballast_FrameTime")
+    timer.Remove("Ballast_FrameStats")
+end
