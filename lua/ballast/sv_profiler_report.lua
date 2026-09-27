@@ -51,3 +51,8 @@ local function reply(ply, text)
         MsgN(text)
     end
 end
+
+--- Indique si l'appelant peut lire les mesures : console ou superadmin.
+local function is_allowed(ply)
+    return not IsValid(ply) or ply:IsSuperAdmin()
+end
