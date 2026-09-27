@@ -45,3 +45,13 @@ local COMPACT = {
     { ";", "point-virgule : une instruction par ligne" },
     { "^%s*[%w_%.%[%]]+%s*,[^=]*[^=~<>]=[^=]", "affectation multiple" },
 }
+
+--- Renvoie la première règle de rules dont le motif apparaît dans code.
+local function first_match(code, rules)
+    for _, rule in ipairs(rules) do
+        if code:find(rule[1]) then
+            return rule
+        end
+    end
+    return nil
+end
