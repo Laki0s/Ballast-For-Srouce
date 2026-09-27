@@ -92,3 +92,17 @@ local function cmd_reset(ply)
     Ballast.log(Ballast.lang.cat_profiler, Ballast.text("hooks_reset"))
     reply(ply, "[Ballast] " .. Ballast.text("hooks_reset"))
 end
+
+--- Commande ballast_status : temps de frame et état du serveur.
+local function cmd_status(ply)
+    local server = Ballast.server
+
+    if not is_allowed(ply) then
+        return
+    end
+    reply(ply, Ballast.text("status_frame", Ballast.frame_avg * MS,
+        Ballast.frame_max * MS, Ballast.frame_budget * MS))
+    reply(ply, Ballast.text("status_server", server.edicts or 0,
+        server.players or 0, (server.memory or 0) / KB_PER_MB))
+    reply(ply, Ballast.text("status_spikes", Ballast.stats.lag_spikes or 0))
+end
