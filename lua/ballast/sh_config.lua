@@ -30,3 +30,6 @@ Ballast.config.spike_factor = 2
 --- Module 1 : au-delà (en secondes), une frame est une pause du serveur
 --- (hibernation sans joueur) et non un pic de lag.
 Ballast.config.pause_limit = 10
+
+--- Module 1 : nombre de moyennes conservées pour le graphe (60 s).
+Ballast.config.history_size = 60
