@@ -29,3 +29,12 @@ local function read_file(path)
     handle:close()
     return text
 end
+
+--- Formate une infraction, en annotation GitHub dans la CI.
+local function format_violation(path, line, rule, message)
+    if os.getenv("GITHUB_ACTIONS") then
+        return string.format("::error file=%s,line=%d::[%s] %s",
+            path, line, rule, message)
+    end
+    return string.format("%s:%d: [%s] %s", path, line, rule, message)
+end
