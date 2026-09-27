@@ -89,3 +89,17 @@ function M.strip(text)
     parts[#parts + 1] = text:sub(pos)
     return table.concat(parts)
 end
+
+--- Découpe un texte en lignes, sans les retours à la ligne.
+function M.split(text)
+    local lines = {}
+    local body = text
+
+    if body:sub(-1) ~= "\n" then
+        body = body .. "\n"
+    end
+    for line in body:gmatch("(.-)\n") do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
