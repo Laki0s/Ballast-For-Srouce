@@ -106,3 +106,27 @@ local function scan_line(state, code, line)
         end
     end
 end
+
+--- Repère les fonctions (file.functions) et la fonction qui possède
+--- chaque ligne (file.owners), en signalant les imbrications.
+function M.check(file, report)
+    local state = {
+        stack = {},
+        open = {},
+        functions = {},
+        owners = {},
+        pending = 0,
+        report = report,
+    }
+
+    for n, code in ipairs(file.code) do
+        scan_line(state, code, n)
+    end
+    for _, info in ipairs(state.functions) do
+        info.last = info.last or #file.code
+    end
+    file.functions = state.functions
+    file.owners = state.owners
+end
+
+return M
