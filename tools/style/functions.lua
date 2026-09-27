@@ -26,3 +26,12 @@ local function check_length(file, report)
         end
     end
 end
+
+--- C-F5 : 4 paramètres maximum, ... compris.
+local function check_params(file, report)
+    for _, info in ipairs(file.functions) do
+        if info.params > MAX_PARAMS then
+            report(info.line, "C-F5", info.params .. " paramètres")
+        end
+    end
+end
