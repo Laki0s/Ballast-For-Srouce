@@ -33,3 +33,6 @@ Ballast.config.pause_limit = 10
 
 --- Module 1 : nombre de moyennes conservées pour le graphe (60 s).
 Ballast.config.history_size = 60
+
+--- Module 1 : intervalle d'agrégation des mesures, en secondes.
+Ballast.config.stats_interval = 1
