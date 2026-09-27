@@ -29,3 +29,12 @@ local function report_spike(frame_time)
     Ballast.count("lag_spikes")
     hook.Run("Ballast_LagSpike", frame_time)
 end
+
+--- Cumule une frame pour la moyenne et le maximum de la seconde.
+local function accumulate(frame_time)
+    acc = acc + frame_time
+    count = count + 1
+    if frame_time > peak then
+        peak = frame_time
+    end
+end
