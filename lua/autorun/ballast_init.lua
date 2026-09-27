@@ -29,3 +29,14 @@ local function send_file(name, realm)
         AddCSLuaFile(FOLDER .. name)
     end
 end
+
+--- Indique si un fichier de ce réalm s'exécute ici.
+local function should_run(realm)
+    if realm == "sh_" then
+        return true
+    end
+    if realm == "sv_" then
+        return SERVER == true
+    end
+    return CLIENT == true
+end
