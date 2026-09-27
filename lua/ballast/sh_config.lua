@@ -39,3 +39,6 @@ Ballast.config.stats_interval = 1
 
 --- Module 1 : profiler de hooks, piloté par la convar ballast_debug.
 Ballast.config.debug = false
+
+--- Module 1 : nombre de hooks affichés par la commande ballast_hooks.
+Ballast.config.top_hooks = 10
