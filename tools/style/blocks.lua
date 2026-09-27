@@ -73,3 +73,13 @@ local function check_elseif(state, line)
         state.report(line, "C-C1", "elseif de profondeur " .. depth)
     end
 end
+
+--- Dépile le bloc fermé ; une fonction retient sa ligne de fin.
+local function pop_block(state, line)
+    local frame = table.remove(state.stack)
+
+    if frame and frame.info then
+        frame.info.last = line
+        table.remove(state.open)
+    end
+end
