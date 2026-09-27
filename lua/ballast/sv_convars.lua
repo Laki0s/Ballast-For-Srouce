@@ -13,3 +13,13 @@ local FLAGS = { FCVAR_ARCHIVE, FCVAR_NOTIFY }
 function Ballast.add_convar(name, default, help)
     return CreateConVar(PREFIX .. name, default, FLAGS, help, 0, 1)
 end
+
+--- Appelle on_change(actif) tout de suite puis à chaque changement.
+function Ballast.watch_convar(name, id, on_change)
+    local full = PREFIX .. name
+
+    cvars.AddChangeCallback(full, function(_, _, value)
+        on_change((tonumber(value) or 0) ~= 0)
+    end, id)
+    on_change(GetConVar(full):GetBool())
+end
