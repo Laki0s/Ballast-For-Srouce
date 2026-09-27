@@ -106,3 +106,8 @@ local function cmd_status(ply)
         server.players or 0, (server.memory or 0) / KB_PER_MB))
     reply(ply, Ballast.text("status_spikes", Ballast.stats.lag_spikes or 0))
 end
+
+concommand.Add("ballast_hooks", cmd_hooks, nil, Ballast.lang.cmd_hooks)
+concommand.Add("ballast_hooks_reset", cmd_reset, nil,
+    Ballast.lang.cmd_reset)
+concommand.Add("ballast_status", cmd_status, nil, Ballast.lang.cmd_status)
