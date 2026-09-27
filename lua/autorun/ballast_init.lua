@@ -22,3 +22,10 @@ Ballast.original = Ballast.original or {}
 local function get_realm(name)
     return string.sub(name, 1, 3)
 end
+
+--- Envoie un fichier aux clients s'il doit y être exécuté.
+local function send_file(name, realm)
+    if realm ~= "sv_" then
+        AddCSLuaFile(FOLDER .. name)
+    end
+end
