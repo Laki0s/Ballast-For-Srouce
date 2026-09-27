@@ -61,3 +61,17 @@ local function special_end(text, pos)
     end
     return nil
 end
+
+--- Ajoute à parts le code jusqu'à start puis le jeton spécial masqué ;
+--- renvoie la position où reprendre la lecture.
+local function append_token(parts, text, pos, start)
+    local finish, fill = special_end(text, start)
+
+    if not finish then
+        parts[#parts + 1] = text:sub(pos, start)
+        return start + 1
+    end
+    parts[#parts + 1] = text:sub(pos, start - 1)
+    parts[#parts + 1] = blank(text:sub(start, finish), fill)
+    return finish + 1
+end
