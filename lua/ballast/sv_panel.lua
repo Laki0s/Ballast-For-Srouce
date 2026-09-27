@@ -16,3 +16,10 @@ Ballast.logs = Ballast.logs or {}
 function Ballast.count(key, n)
     Ballast.stats[key] = (Ballast.stats[key] or 0) + (n or 1)
 end
+
+--- Recopie une entrée du journal dans la console serveur en mode debug.
+local function echo(cat, msg)
+    if Ballast.config.debug then
+        MsgN("[Ballast] " .. cat .. " : " .. msg)
+    end
+end
