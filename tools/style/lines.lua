@@ -82,3 +82,18 @@ local function check_eol(file, report)
         end
     end
 end
+
+--- C-G8 et C-A3 : pas de ligne vide au début ni à la fin, saut final.
+local function check_edges(file, report)
+    local count = #file.lines
+
+    if file.lines[1] == "" then
+        report(1, "C-G8", "ligne vide en début de fichier")
+    end
+    if count > 0 and file.lines[count] == "" then
+        report(count, "C-G8", "ligne vide en fin de fichier")
+    end
+    if file.text ~= "" and file.text:sub(-1) ~= "\n" then
+        report(count, "C-A3", "saut de ligne final manquant")
+    end
+end
