@@ -17,3 +17,18 @@ local M = {}
 local function blank(chunk, fill)
     return (chunk:gsub("[^\n]", fill))
 end
+
+--- Trouve la fin d'une chaîne entre guillemets ouverte à start.
+local function quoted_end(text, start)
+    local quote = text:sub(start, start)
+    local pos = start + 1
+    local found = nil
+
+    while true do
+        found = text:find("[\\\n" .. quote .. "]", pos)
+        if not found or text:sub(found, found) ~= "\\" then
+            return found or #text
+        end
+        pos = found + 2
+    end
+end
