@@ -55,3 +55,15 @@ local function first_match(code, rules)
     end
     return nil
 end
+
+--- Signale sous le code id la première règle enfreinte de chaque ligne.
+local function check_rules(file, report, rules, id)
+    local rule = nil
+
+    for n, code in ipairs(file.code) do
+        rule = first_match(code, rules)
+        if rule then
+            report(n, id, rule[2])
+        end
+    end
+end
