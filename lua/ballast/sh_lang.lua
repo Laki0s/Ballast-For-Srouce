@@ -13,3 +13,6 @@ Ballast.lang = Ballast.lang or {}
 function Ballast.text(key, ...)
     return string.format(Ballast.lang[key] or key, ...)
 end
+
+--- Catégorie du journal pour les actions du profiler.
+Ballast.lang.cat_profiler = "Profiler"
