@@ -28,3 +28,14 @@ local function parse_header(code, pos, line)
         is_local = code:sub(1, pos - 1):match("local%s+$") ~= nil,
     }
 end
+
+--- Empile un bloc de contrôle et signale une imbrication trop profonde.
+local function push_control(state, line)
+    local top = state.stack[#state.stack]
+    local depth = (top and top.depth or 0) + 1
+
+    state.stack[#state.stack + 1] = { depth = depth }
+    if depth >= MAX_DEPTH then
+        state.report(line, "C-C1", "imbrication de profondeur " .. depth)
+    end
+end
