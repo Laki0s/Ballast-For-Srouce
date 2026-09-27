@@ -41,3 +41,18 @@ Le cadrage technique complet est dans
 
 L'addon ne se charge que par `lua/autorun/ballast_init.lua`. Aucun réglage
 n'est imposé aux joueurs.
+
+## Convars et commandes
+
+| Nom | Défaut | Effet |
+|---|---|---|
+| `ballast_profiler` | `1` | Mesure du temps de frame, des pics de lag et de l'état du serveur |
+| `ballast_debug` | `0` | Profiler de hooks : mesure le coût de chaque hook (coûte du CPU) |
+
+| Commande | Droits | Effet |
+|---|---|---|
+| `ballast_status` | console, superadmin | Temps de frame, edicts, joueurs, mémoire Lua |
+| `ballast_hooks` | console, superadmin | Classement des hooks les plus coûteux |
+| `ballast_hooks_reset` | console, superadmin | Remise à zéro des mesures des hooks |
+
+Le détail du module 1 est dans [`docs/modules/profiler.md`](docs/modules/profiler.md).
