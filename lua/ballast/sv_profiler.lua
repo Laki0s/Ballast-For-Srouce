@@ -76,3 +76,14 @@ local function log_spikes()
         Ballast.text("lag_spikes", spikes, worst))
     spikes = 0
 end
+
+--- Publie moyenne et maximum de la seconde puis remet les cumuls à zéro.
+local function flush_second()
+    Ballast.frame_avg = count > 0 and acc / count or 0
+    Ballast.frame_max = peak
+    push_history(Ballast.frame_avg)
+    log_spikes()
+    acc = 0
+    count = 0
+    peak = 0
+end
