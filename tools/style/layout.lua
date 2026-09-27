@@ -43,3 +43,20 @@ local function matches_any(code, patterns)
     end
     return false
 end
+
+--- Classe une ligne : blank, skip (suite ou fermeture), local ou other.
+local function classify(line, code, prev)
+    if line:match("^%s*$") then
+        return "blank"
+    end
+    if matches_any(prev, OPEN_ENDS) or matches_any(code, OPEN_STARTS) then
+        return "skip"
+    end
+    if matches_any(code, CLOSERS) then
+        return "skip"
+    end
+    if code:match("^%s*local%s") then
+        return "local"
+    end
+    return "other"
+end
