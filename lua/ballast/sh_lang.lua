@@ -16,3 +16,7 @@ end
 
 --- Catégorie du journal pour les actions du profiler.
 Ballast.lang.cat_profiler = "Profiler"
+
+--- Aide des convars d'activation.
+Ballast.lang.cvar_profiler = "Active le profiler (temps de frame, pics)"
+Ballast.lang.cvar_debug = "Active le profiler de hooks (coûte du CPU)"
