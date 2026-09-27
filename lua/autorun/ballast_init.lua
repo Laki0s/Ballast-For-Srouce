@@ -40,3 +40,15 @@ local function should_run(realm)
     end
     return CLIENT == true
 end
+
+--- Charge un fichier du dossier ballast/ selon son préfixe de réalm.
+local function load_file(name)
+    local realm = get_realm(name)
+
+    if SERVER then
+        send_file(name, realm)
+    end
+    if should_run(realm) then
+        include(FOLDER .. name)
+    end
+end
