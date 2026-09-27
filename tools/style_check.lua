@@ -62,3 +62,17 @@ local function check_file(path, total)
         checker.check(file, report)
     end
 end
+
+--- Vérifie les fichiers passés en argument ; code de sortie 1 si infraction.
+local function main(paths)
+    local total = { count = 0 }
+
+    for _, path in ipairs(paths) do
+        check_file(path, total)
+    end
+    print(string.format("%d fichier(s), %d infraction(s)", #paths,
+        total.count))
+    os.exit(total.count > 0 and 1 or 0)
+end
+
+main(arg)
