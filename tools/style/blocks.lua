@@ -63,3 +63,13 @@ local function push_function(state, line, code, pos)
     state.functions[#state.functions + 1] = info
     state.open[#state.open + 1] = info
 end
+
+--- C-C1 : un elseif compte un niveau de plus que son if.
+local function check_elseif(state, line)
+    local top = state.stack[#state.stack]
+    local depth = (top and top.depth or 0) + 1
+
+    if depth >= MAX_DEPTH then
+        state.report(line, "C-C1", "elseif de profondeur " .. depth)
+    end
+end
