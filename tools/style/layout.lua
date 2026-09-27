@@ -68,3 +68,12 @@ local function on_local(state, n, report)
     end
     state.has_locals = true
 end
+
+--- C-L6 : une seule ligne vide, juste après les déclarations.
+local function on_blank(state, n, report)
+    if state.phase == "decl" and state.has_locals then
+        state.phase = "gap"
+        return
+    end
+    report(n, "C-L6", "ligne vide inattendue dans une fonction")
+end
