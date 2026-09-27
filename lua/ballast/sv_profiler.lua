@@ -110,3 +110,6 @@ local function set_enabled(enabled)
         stop()
     end
 end
+
+Ballast.add_convar("profiler", "1", Ballast.lang.cvar_profiler)
+Ballast.watch_convar("profiler", "Ballast_FrameTime", set_enabled)
