@@ -33,3 +33,12 @@ function Ballast.get_top_hooks(n)
     end
     return list
 end
+
+--- Remet les mesures à zéro sans casser les enveloppes déjà posées.
+function Ballast.reset_hook_stats()
+    for _, stat in pairs(Ballast.hook_stats) do
+        stat.total = 0
+        stat.calls = 0
+        stat.max = 0
+    end
+end
