@@ -58,3 +58,15 @@ local function check_trailing(file, report)
         end
     end
 end
+
+--- C-L2 : indentation par 4 espaces, aucune tabulation.
+local function check_indent(file, report)
+    for n, line in ipairs(file.lines) do
+        if line:find("\t", 1, true) then
+            report(n, "C-L2", "tabulation interdite")
+        end
+        if #line:match("^ *") % INDENT ~= 0 then
+            report(n, "C-L2", "indentation qui n'est pas un multiple de 4")
+        end
+    end
+end
