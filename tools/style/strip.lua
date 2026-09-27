@@ -75,3 +75,17 @@ local function append_token(parts, text, pos, start)
     parts[#parts + 1] = blank(text:sub(start, finish), fill)
     return finish + 1
 end
+
+--- Masque chaînes (espaces) et commentaires (octet 1) en gardant les lignes.
+function M.strip(text)
+    local parts = {}
+    local pos = 1
+    local start = text:find(SPECIAL, pos)
+
+    while start do
+        pos = append_token(parts, text, pos, start)
+        start = text:find(SPECIAL, pos)
+    end
+    parts[#parts + 1] = text:sub(pos)
+    return table.concat(parts)
+end
