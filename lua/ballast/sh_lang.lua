@@ -27,3 +27,10 @@ Ballast.lang.lag_spikes = "%d pic(s) de lag, pire frame : %.1f ms"
 --- Journal : activation du profiler de hooks.
 Ballast.lang.hooks_on = "Profiler de hooks activé"
 Ballast.lang.hooks_off = "Profiler de hooks désactivé"
+
+--- Commande ballast_hooks : classement des hooks les plus coûteux.
+Ballast.lang.cmd_hooks = "Affiche les hooks les plus coûteux"
+Ballast.lang.hooks_header = "[Ballast] Top %d des hooks par temps total :"
+Ballast.lang.hooks_line = "%2d. %s : %.2f ms, %d appels, max %.3f ms, "
+    .. "moy. %.3f ms"
+Ballast.lang.hooks_empty = "[Ballast] Aucune mesure : ballast_debug 1."
