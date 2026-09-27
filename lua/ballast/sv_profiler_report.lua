@@ -82,3 +82,13 @@ local function cmd_hooks(ply)
         reply(ply, format_hook(rank, entry))
     end
 end
+
+--- Commande ballast_hooks_reset : remet les mesures des hooks à zéro.
+local function cmd_reset(ply)
+    if not is_allowed(ply) then
+        return
+    end
+    Ballast.reset_hook_stats()
+    Ballast.log(Ballast.lang.cat_profiler, Ballast.text("hooks_reset"))
+    reply(ply, "[Ballast] " .. Ballast.text("hooks_reset"))
+end
