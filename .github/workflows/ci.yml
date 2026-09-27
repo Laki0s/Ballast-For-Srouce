@@ -1,0 +1,36 @@
+# Vérifications lancées à chaque pull request et à chaque push
+# sur main et dev : glualint, coding style Ballast et tests.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, dev]
+
+jobs:
+  glualint:
+    uses: FPtje/GLuaFixer/.github/workflows/glualint.yml@master
+    with:
+      config: glualint.json
+
+  style:
+    name: Coding style Ballast
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer LuaJIT
+        run: sudo apt-get update && sudo apt-get install -y luajit
+      - name: Vérifier le style
+        run: >
+          find lua tools tests -name '*.lua' -print0
+          | xargs -0 luajit tools/style_check.lua
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer LuaJIT
+        run: sudo apt-get update && sudo apt-get install -y luajit
+      - name: Lancer les tests
+        run: luajit tests/run.lua tests/test_*.lua
