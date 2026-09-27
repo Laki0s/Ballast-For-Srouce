@@ -38,3 +38,11 @@ Ballast.lang.hooks_empty = "[Ballast] Aucune mesure : ballast_debug 1."
 --- Commande ballast_hooks_reset : remise à zéro des mesures.
 Ballast.lang.cmd_reset = "Remet à zéro les mesures des hooks"
 Ballast.lang.hooks_reset = "Mesures des hooks remises à zéro"
+
+--- Commande ballast_status : résumé de l'état du serveur.
+Ballast.lang.cmd_status = "Affiche le temps de frame et l'état du serveur"
+Ballast.lang.status_frame = "[Ballast] Frame : moy. %.2f ms, max %.2f ms, "
+    .. "budget %.2f ms"
+Ballast.lang.status_server = "[Ballast] Edicts : %d, joueurs : %d, "
+    .. "mémoire Lua : %.1f Mo"
+Ballast.lang.status_spikes = "[Ballast] Pics de lag depuis le démarrage : %d"
