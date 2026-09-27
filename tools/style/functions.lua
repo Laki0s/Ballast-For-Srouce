@@ -35,3 +35,22 @@ local function check_params(file, report)
         end
     end
 end
+
+--- C-O3 : 10 fonctions nommées par fichier, dont 5 publiques.
+local function check_counts(file, report)
+    local named = 0
+    local public = 0
+
+    for _, info in ipairs(file.functions) do
+        if info.name ~= "" then
+            named = named + 1
+            public = public + (info.is_local and 0 or 1)
+        end
+    end
+    if named > MAX_FUNCTIONS then
+        report(1, "C-O3", named .. " fonctions dans le fichier")
+    end
+    if public > MAX_PUBLIC then
+        report(1, "C-O3", public .. " fonctions publiques dans le fichier")
+    end
+end
