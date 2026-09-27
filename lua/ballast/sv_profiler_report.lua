@@ -56,3 +56,11 @@ end
 local function is_allowed(ply)
     return not IsValid(ply) or ply:IsSuperAdmin()
 end
+
+--- Formate une ligne du classement des hooks.
+local function format_hook(rank, entry)
+    local avg = entry.calls > 0 and entry.total / entry.calls or 0
+
+    return Ballast.text("hooks_line", rank, entry.name, entry.total * MS,
+        entry.calls, entry.max * MS, avg * MS)
+end
