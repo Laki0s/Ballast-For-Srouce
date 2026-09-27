@@ -75,3 +75,21 @@ local function check_inner_comments(file, report)
         end
     end
 end
+
+--- Indique si le nom de la fonction relève du projet (local ou Ballast.*).
+local function is_project_name(info)
+    return info.name ~= ""
+        and (info.is_local or info.name:match("^Ballast%.") ~= nil)
+end
+
+--- C-F2 : fonctions locales et Ballast.* en snake_case anglais.
+local function check_names(file, report)
+    local short = nil
+
+    for _, info in ipairs(file.functions) do
+        short = info.name:match("([^%.:]+)$") or ""
+        if is_project_name(info) and not short:match(SNAKE_CASE) then
+            report(info.line, "C-F2", info.name .. " n'est pas en snake_case")
+        end
+    end
+end
