@@ -40,3 +40,12 @@ local function check_header(file, report)
     end
     report(#HEADER, "C-G1", "en-tête du projet non refermé par --")
 end
+
+--- C-F3 : 80 colonnes maximum.
+local function check_width(file, report)
+    for n, line in ipairs(file.lines) do
+        if utf8_len(line) > MAX_WIDTH then
+            report(n, "C-F3", "ligne de plus de 80 colonnes")
+        end
+    end
+end
