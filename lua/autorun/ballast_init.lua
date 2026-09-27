@@ -17,3 +17,8 @@ Ballast.slogan = "Keep your tick afloat"
 Ballast.version = "0.1.0"
 Ballast.author = "Laki0s_"
 Ballast.original = Ballast.original or {}
+
+--- Renvoie le préfixe de réalm d'un fichier : sv_, cl_ ou sh_.
+local function get_realm(name)
+    return string.sub(name, 1, 3)
+end
