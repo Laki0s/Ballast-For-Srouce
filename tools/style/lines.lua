@@ -70,3 +70,15 @@ local function check_indent(file, report)
         end
     end
 end
+
+--- C-G6 : fins de ligne LF, sans \r ni \ final.
+local function check_eol(file, report)
+    for n, line in ipairs(file.lines) do
+        if line:find("\r", 1, true) then
+            report(n, "C-G6", "fin de ligne \\r interdite")
+        end
+        if file.code[n]:match("\\%s*$") then
+            report(n, "C-G6", "\\ en fin de ligne interdit")
+        end
+    end
+end
