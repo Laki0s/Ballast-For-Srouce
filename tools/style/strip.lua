@@ -103,3 +103,17 @@ function M.split(text)
     end
     return lines
 end
+
+--- Prépare les vues d'un fichier : lignes brutes, code seul, commentaires.
+function M.build(path, text)
+    local file = { path = path, text = text, code = {}, comments = {} }
+
+    file.lines = M.split(text)
+    for n, line in ipairs(M.split(M.strip(text))) do
+        file.comments[n] = line:find(COMMENT_FILL, 1, true) ~= nil
+        file.code[n] = line:gsub(COMMENT_FILL, " ")
+    end
+    return file
+end
+
+return M
