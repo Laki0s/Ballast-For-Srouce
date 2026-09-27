@@ -46,3 +46,19 @@ local function make_reporter(path, total)
         print(format_violation(path, line, rule, message))
     end
 end
+
+--- Vérifie un fichier et ajoute ses infractions au total.
+local function check_file(path, total)
+    local text = read_file(path)
+    local report = make_reporter(path, total)
+    local file = nil
+
+    if not text then
+        report(1, "IO", "fichier illisible")
+        return
+    end
+    file = strip.build(path, text)
+    for _, checker in ipairs(CHECKERS) do
+        checker.check(file, report)
+    end
+end
