@@ -64,3 +64,15 @@ local function push_history(avg)
         table.remove(history, 1)
     end
 end
+
+--- Journalise en une seule ligne les pics de la seconde écoulée.
+local function log_spikes()
+    local worst = peak * MS
+
+    if spikes == 0 then
+        return
+    end
+    Ballast.log(Ballast.lang.cat_profiler,
+        Ballast.text("lag_spikes", spikes, worst))
+    spikes = 0
+end
