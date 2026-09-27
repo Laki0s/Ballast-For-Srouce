@@ -106,3 +106,16 @@ local function check_blank_runs(file, report)
         end
     end
 end
+
+--- Applique toutes les règles ligne à ligne au fichier.
+function M.check(file, report)
+    check_header(file, report)
+    check_width(file, report)
+    check_trailing(file, report)
+    check_indent(file, report)
+    check_eol(file, report)
+    check_edges(file, report)
+    check_blank_runs(file, report)
+end
+
+return M
