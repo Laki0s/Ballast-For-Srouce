@@ -54,3 +54,12 @@ local function push_do(state, line)
     end
     push_control(state, line)
 end
+
+--- Empile une fonction : sa profondeur de contrôle repart de zéro.
+local function push_function(state, line, code, pos)
+    local info = parse_header(code, pos, line)
+
+    state.stack[#state.stack + 1] = { depth = 0, info = info }
+    state.functions[#state.functions + 1] = info
+    state.open[#state.open + 1] = info
+end
