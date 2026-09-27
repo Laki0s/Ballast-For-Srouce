@@ -19,3 +19,10 @@ local function record(key, value)
         server[max_key] = value
     end
 end
+
+--- Échantillonne edicts, joueurs et mémoire Lua (en Ko).
+local function sample()
+    record("edicts", ents.GetEdictCount())
+    record("players", player.GetCount())
+    record("memory", collectgarbage("count"))
+end
