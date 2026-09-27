@@ -54,3 +54,15 @@ local function check_counts(file, report)
         report(1, "C-O3", public .. " fonctions publiques dans le fichier")
     end
 end
+
+--- C-F8 : un commentaire --- au-dessus de chaque fonction nommée.
+local function check_doc(file, report)
+    local above = nil
+
+    for _, info in ipairs(file.functions) do
+        above = file.lines[info.line - 1] or ""
+        if info.name ~= "" and not above:match("^%s*%-%-%-") then
+            report(info.line, "C-F8", "commentaire --- manquant")
+        end
+    end
+end
