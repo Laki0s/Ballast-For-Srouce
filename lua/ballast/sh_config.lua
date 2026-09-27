@@ -26,3 +26,7 @@ Ballast.config.net_default = 30
 
 --- Module 1 : pic de lag quand une frame dépasse spike_factor ticks.
 Ballast.config.spike_factor = 2
+
+--- Module 1 : au-delà (en secondes), une frame est une pause du serveur
+--- (hibernation sans joueur) et non un pic de lag.
+Ballast.config.pause_limit = 10
