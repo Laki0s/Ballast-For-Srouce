@@ -24,3 +24,19 @@ local M = {}
 local function utf8_len(line)
     return #line - select(2, line:gsub("[\128-\191]", ""))
 end
+
+--- C-G1 : en-tête standard du projet en tête de fichier.
+local function check_header(file, report)
+    for n, pattern in ipairs(HEADER) do
+        if not (file.lines[n] or ""):match(pattern) then
+            report(n, "C-G1", "en-tête du projet absent ou incomplet")
+            return
+        end
+    end
+    for n = #HEADER + 1, HEADER_SEARCH do
+        if file.lines[n] == "--" then
+            return
+        end
+    end
+    report(#HEADER, "C-G1", "en-tête du projet non refermé par --")
+end
