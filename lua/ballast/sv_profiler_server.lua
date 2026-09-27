@@ -26,3 +26,14 @@ local function sample()
     record("players", player.GetCount())
     record("memory", collectgarbage("count"))
 end
+
+--- Démarre ou arrête l'échantillonnage selon la convar ballast_profiler.
+local function set_enabled(enabled)
+    if not enabled then
+        timer.Remove("Ballast_ServerStats")
+        return
+    end
+    sample()
+    timer.Create("Ballast_ServerStats", Ballast.config.stats_interval, 0,
+        sample)
+end
