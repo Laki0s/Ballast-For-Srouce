@@ -36,3 +36,6 @@ Ballast.config.history_size = 60
 
 --- Module 1 : intervalle d'agrégation des mesures, en secondes.
 Ballast.config.stats_interval = 1
+
+--- Module 1 : profiler de hooks, piloté par la convar ballast_debug.
+Ballast.config.debug = false
