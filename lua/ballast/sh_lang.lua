@@ -23,3 +23,7 @@ Ballast.lang.cvar_debug = "Active le profiler de hooks (coûte du CPU)"
 
 --- Journal : pics de lag agrégés sur une seconde.
 Ballast.lang.lag_spikes = "%d pic(s) de lag, pire frame : %.1f ms"
+
+--- Journal : activation du profiler de hooks.
+Ballast.lang.hooks_on = "Profiler de hooks activé"
+Ballast.lang.hooks_off = "Profiler de hooks désactivé"
