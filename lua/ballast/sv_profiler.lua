@@ -54,3 +54,13 @@ local function measure_frame()
         report_spike(frame_time)
     end
 end
+
+--- Ajoute une moyenne à l'historique, borné à history_size valeurs.
+local function push_history(avg)
+    local history = Ballast.history
+
+    history[#history + 1] = avg
+    while #history > config.history_size do
+        table.remove(history, 1)
+    end
+end
