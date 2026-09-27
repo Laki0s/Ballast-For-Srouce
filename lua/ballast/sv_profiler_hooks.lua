@@ -70,3 +70,10 @@ local function list_hooks()
     end
     return list
 end
+
+--- Enveloppe les hooks enregistrés avant l'activation.
+local function wrap_existing()
+    for _, entry in ipairs(list_hooks()) do
+        profiled_add(entry.event, entry.id, entry.fn)
+    end
+end
