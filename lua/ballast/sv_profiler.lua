@@ -87,3 +87,11 @@ local function flush_second()
     count = 0
     peak = 0
 end
+
+--- Branche la mesure : hook Think et timer d'agrégation.
+local function start()
+    last = SysTime()
+    hook.Add("Think", "Ballast_FrameTime", measure_frame)
+    timer.Create("Ballast_FrameStats", config.stats_interval, 0,
+        flush_second)
+end
