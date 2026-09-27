@@ -64,3 +64,21 @@ local function format_hook(rank, entry)
     return Ballast.text("hooks_line", rank, entry.name, entry.total * MS,
         entry.calls, entry.max * MS, avg * MS)
 end
+
+--- Commande ballast_hooks : affiche les hooks les plus coûteux.
+local function cmd_hooks(ply)
+    local top = nil
+
+    if not is_allowed(ply) then
+        return
+    end
+    top = Ballast.get_top_hooks(Ballast.config.top_hooks)
+    if #top == 0 then
+        reply(ply, Ballast.text("hooks_empty"))
+        return
+    end
+    reply(ply, Ballast.text("hooks_header", #top))
+    for rank, entry in ipairs(top) do
+        reply(ply, format_hook(rank, entry))
+    end
+end
