@@ -38,3 +38,19 @@ local function accumulate(frame_time)
         peak = frame_time
     end
 end
+
+--- Mesure le temps écoulé depuis la frame précédente (hook Think).
+local function measure_frame()
+    local now = SysTime()
+    local frame_time = now - last
+
+    last = now
+    if frame_time > config.pause_limit then
+        return
+    end
+    Ballast.frame_time = frame_time
+    accumulate(frame_time)
+    if frame_time > Ballast.frame_budget * config.spike_factor then
+        report_spike(frame_time)
+    end
+end
