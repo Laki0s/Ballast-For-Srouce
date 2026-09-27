@@ -85,3 +85,28 @@ local function on_other(state, n, report)
     end
     state.phase = "body"
 end
+
+--- Traitement de chaque type de ligne.
+local VISITORS = {
+    ["local"] = on_local,
+    ["blank"] = on_blank,
+    ["other"] = on_other,
+}
+
+--- Vérifie la mise en page des lignes qui appartiennent à la fonction info.
+local function check_function(file, info, report)
+    local state = { phase = "decl", has_locals = false }
+    local prev = ""
+    local kind = nil
+
+    for n = info.line + 1, info.last - 1 do
+        kind = file.owners[n] == info
+            and classify(file.lines[n], file.code[n], prev) or nil
+        if VISITORS[kind] then
+            VISITORS[kind](state, n, report)
+        end
+        if kind and kind ~= "blank" then
+            prev = file.code[n]
+        end
+    end
+end
