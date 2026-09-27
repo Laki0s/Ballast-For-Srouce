@@ -39,3 +39,25 @@ local function long_end(text, start, level)
 
     return finish or #text
 end
+
+--- Renvoie la fin et le remplissage du jeton spécial débutant à pos,
+--- ou nil si pos n'ouvre ni chaîne ni commentaire.
+local function special_end(text, pos)
+    local c = text:sub(pos, pos)
+    local level = text:match("^%[(=*)%[", pos)
+    local comment = text:match("^%-%-%[(=*)%[", pos)
+
+    if c == "\"" or c == "'" then
+        return quoted_end(text, pos), STRING_FILL
+    end
+    if c == "[" and level then
+        return long_end(text, pos, level), STRING_FILL
+    end
+    if comment then
+        return long_end(text, pos, comment), COMMENT_FILL
+    end
+    if text:sub(pos, pos + 1) == "--" then
+        return (text:find("\n", pos) or #text + 1) - 1, COMMENT_FILL
+    end
+    return nil
+end
