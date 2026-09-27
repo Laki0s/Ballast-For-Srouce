@@ -93,3 +93,15 @@ local function check_names(file, report)
         end
     end
 end
+
+--- Applique toutes les règles de fonctions (après blocks.check).
+function M.check(file, report)
+    check_length(file, report)
+    check_params(file, report)
+    check_counts(file, report)
+    check_doc(file, report)
+    check_inner_comments(file, report)
+    check_names(file, report)
+end
+
+return M
