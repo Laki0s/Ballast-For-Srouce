@@ -20,3 +20,6 @@ Ballast.lang.cat_profiler = "Profiler"
 --- Aide des convars d'activation.
 Ballast.lang.cvar_profiler = "Active le profiler (temps de frame, pics)"
 Ballast.lang.cvar_debug = "Active le profiler de hooks (coûte du CPU)"
+
+--- Journal : pics de lag agrégés sur une seconde.
+Ballast.lang.lag_spikes = "%d pic(s) de lag, pire frame : %.1f ms"
