@@ -45,3 +45,12 @@ local function push_loop(state, line)
     state.pending = state.pending + 1
     push_control(state, line)
 end
+
+--- Ouvre un bloc do seul, ou consomme le do d'une boucle.
+local function push_do(state, line)
+    if state.pending > 0 then
+        state.pending = state.pending - 1
+        return
+    end
+    push_control(state, line)
+end
