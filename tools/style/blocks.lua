@@ -39,3 +39,9 @@ local function push_control(state, line)
         state.report(line, "C-C1", "imbrication de profondeur " .. depth)
     end
 end
+
+--- Empile une boucle for ou while, dont le do n'ouvre pas de bloc.
+local function push_loop(state, line)
+    state.pending = state.pending + 1
+    push_control(state, line)
+end
