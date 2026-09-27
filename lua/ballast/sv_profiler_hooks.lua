@@ -58,3 +58,15 @@ local function profiled_add(event, id, fn)
     end
     return raw_add(event, id, wrap(event, id, fn))
 end
+
+--- Copie la liste des hooks pour la modifier sans casser le parcours.
+local function list_hooks()
+    local list = {}
+
+    for event, hooks in pairs(hook.GetTable()) do
+        for id, fn in pairs(hooks) do
+            list[#list + 1] = { event = event, id = id, fn = fn }
+        end
+    end
+    return list
+end
