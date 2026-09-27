@@ -77,3 +77,11 @@ local function on_blank(state, n, report)
     end
     report(n, "C-L6", "ligne vide inattendue dans une fonction")
 end
+
+--- C-L6 : la première instruction suit la ligne vide des déclarations.
+local function on_other(state, n, report)
+    if state.phase == "decl" and state.has_locals then
+        report(n, "C-L6", "ligne vide attendue après les déclarations")
+    end
+    state.phase = "body"
+end
