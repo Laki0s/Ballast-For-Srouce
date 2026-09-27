@@ -106,3 +106,20 @@ local function uninstall()
     end
     unwrap_existing()
 end
+
+--- Suit la convar ballast_debug et journalise chaque changement d'état.
+local function set_enabled(enabled)
+    local active = hook.Add == Ballast.original.hook_profiler
+
+    Ballast.config.debug = enabled
+    if enabled == active then
+        return
+    end
+    if enabled then
+        install()
+    else
+        uninstall()
+    end
+    Ballast.log(Ballast.lang.cat_profiler,
+        Ballast.text(enabled and "hooks_on" or "hooks_off"))
+end
