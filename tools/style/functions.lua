@@ -66,3 +66,12 @@ local function check_doc(file, report)
         end
     end
 end
+
+--- C-F8 : aucun commentaire à l'intérieur d'une fonction.
+local function check_inner_comments(file, report)
+    for n, is_comment in ipairs(file.comments) do
+        if is_comment and file.owners[n] then
+            report(n, "C-F8", "commentaire dans une fonction")
+        end
+    end
+end
