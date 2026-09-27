@@ -97,3 +97,12 @@ local function check_edges(file, report)
         report(count, "C-A3", "saut de ligne final manquant")
     end
 end
+
+--- C-G2 : jamais deux lignes vides de suite.
+local function check_blank_runs(file, report)
+    for n = 2, #file.lines do
+        if file.lines[n] == "" and file.lines[n - 1] == "" then
+            report(n, "C-G2", "deux lignes vides consécutives")
+        end
+    end
+end
