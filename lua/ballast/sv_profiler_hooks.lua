@@ -123,3 +123,6 @@ local function set_enabled(enabled)
     Ballast.log(Ballast.lang.cat_profiler,
         Ballast.text(enabled and "hooks_on" or "hooks_off"))
 end
+
+Ballast.add_convar("debug", "0", Ballast.lang.cvar_debug)
+Ballast.watch_convar("debug", "Ballast_HookProfiler", set_enabled)
