@@ -1,0 +1,7 @@
+# Fins de ligne LF partout, jamais de \r (règle C-G6)
+* text=auto eol=lf
+
+# Fichiers binaires : jamais convertis ni comparés ligne à ligne
+*.pdf binary
+*.png binary
+*.jpg binary
