@@ -38,3 +38,11 @@ local function format_violation(path, line, rule, message)
     end
     return string.format("%s:%d: [%s] %s", path, line, rule, message)
 end
+
+--- Crée la fonction de signalement d'un fichier, qui compte les infractions.
+local function make_reporter(path, total)
+    return function(line, rule, message)
+        total.count = total.count + 1
+        print(format_violation(path, line, rule, message))
+    end
+end
