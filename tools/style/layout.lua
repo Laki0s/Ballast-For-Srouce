@@ -60,3 +60,11 @@ local function classify(line, code, prev)
     end
     return "other"
 end
+
+--- C-L5 : les déclarations restent en tête de la fonction.
+local function on_local(state, n, report)
+    if state.phase ~= "decl" then
+        report(n, "C-L5", "déclaration après une instruction")
+    end
+    state.has_locals = true
+end
