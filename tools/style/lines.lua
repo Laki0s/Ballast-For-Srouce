@@ -49,3 +49,12 @@ local function check_width(file, report)
         end
     end
 end
+
+--- C-G7 : aucun espace en fin de ligne.
+local function check_trailing(file, report)
+    for n, line in ipairs(file.lines) do
+        if line:match("[ \t]$") then
+            report(n, "C-G7", "espace en fin de ligne")
+        end
+    end
+end
