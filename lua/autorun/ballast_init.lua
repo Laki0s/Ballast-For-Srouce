@@ -54,3 +54,4 @@ local function load_file(name)
 end
 
 load_file("sh_config.lua")
+load_file("sh_lang.lua")
