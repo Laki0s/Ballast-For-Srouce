@@ -34,3 +34,7 @@ Ballast.lang.hooks_header = "[Ballast] Top %d des hooks par temps total :"
 Ballast.lang.hooks_line = "%2d. %s : %.2f ms, %d appels, max %.3f ms, "
     .. "moy. %.3f ms"
 Ballast.lang.hooks_empty = "[Ballast] Aucune mesure : ballast_debug 1."
+
+--- Commande ballast_hooks_reset : remise à zéro des mesures.
+Ballast.lang.cmd_reset = "Remet à zéro les mesures des hooks"
+Ballast.lang.hooks_reset = "Mesures des hooks remises à zéro"
