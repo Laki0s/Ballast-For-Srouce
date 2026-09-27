@@ -23,3 +23,6 @@ Ballast.config.net_limits = {}
 
 --- Module 3 : limite par défaut des messages absents de net_limits.
 Ballast.config.net_default = 30
+
+--- Module 1 : pic de lag quand une frame dépasse spike_factor ticks.
+Ballast.config.spike_factor = 2
