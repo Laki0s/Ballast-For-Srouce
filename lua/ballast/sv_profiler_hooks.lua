@@ -49,11 +49,13 @@ local function wrap(event, id, fn)
     return wrapper
 end
 
---- Remplaçant de hook.Add pendant le mode debug.
+--- Remplaçant de hook.Add : n'enveloppe qu'en mode debug, et laisse
+--- passer les hooks s'il reste branché derrière un autre addon.
 local function profiled_add(event, id, fn)
     local raw_add = Ballast.original.hook_add
 
-    if type(fn) ~= "function" or Ballast.original.hooks[fn] then
+    if not Ballast.config.debug or type(fn) ~= "function"
+        or Ballast.original.hooks[fn] then
         return raw_add(event, id, fn)
     end
     return raw_add(event, id, wrap(event, id, fn))
@@ -89,32 +91,37 @@ local function unwrap_existing()
     end
 end
 
---- Remplace hook.Add en retenant la version courante pour le retour.
+--- Remplace hook.Add en retenant la version courante pour le retour, sauf
+--- si le profiler est resté branché derrière un autre addon.
 local function install()
-    if hook.Add ~= Ballast.original.hook_profiler then
+    if not Ballast.original.hook_installed then
         Ballast.original.hook_add = hook.Add
+        Ballast.original.hook_profiler = profiled_add
+        Ballast.original.hook_installed = true
+        hook.Add = profiled_add
     end
-    Ballast.original.hook_profiler = profiled_add
-    hook.Add = profiled_add
     wrap_existing()
 end
 
---- Rend hook.Add d'origine, sauf si un autre addon l'a remplacé depuis.
+--- Rend hook.Add d'origine, sauf si un autre addon l'a remplacé depuis :
+--- le profiler reste alors dans la chaîne et laisse passer les hooks.
 local function uninstall()
     if hook.Add == Ballast.original.hook_profiler then
         hook.Add = Ballast.original.hook_add
+        Ballast.original.hook_installed = false
     end
     unwrap_existing()
 end
 
 --- Suit la convar ballast_debug et journalise chaque changement d'état.
 local function set_enabled(enabled)
-    local active = hook.Add == Ballast.original.hook_profiler
+    local active = Ballast.original.profiling == true
 
     Ballast.config.debug = enabled
     if enabled == active then
         return
     end
+    Ballast.original.profiling = enabled
     if enabled then
         install()
     else

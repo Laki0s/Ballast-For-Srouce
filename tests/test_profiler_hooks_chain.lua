@@ -48,9 +48,24 @@ local function test_other_addon_disable()
     Check.equal(Ballast.config.debug, false, "mode debug")
     Check.equal(hook.GetTable().Tick.Test, costly, "fonction d'origine")
     Check.equal(Ballast.logs[1].msg, Ballast.lang.hooks_off, "journal")
+    hook.Add("Tick", "New", costly)
+    Check.equal(hook.GetTable().Tick.New, costly, "nouveau hook intact")
 end
 
 Check.case("désactivation derrière un autre addon", test_other_addon_disable)
+
+--- Réactiver derrière un autre addon reprend les mesures, sans boucle.
+local function test_other_addon_enable()
+    Mock.set_convar("ballast_debug", "1")
+    hook.Add = chain(hook.Add)
+    Mock.set_convar("ballast_debug", "0")
+    Mock.set_convar("ballast_debug", "1")
+    hook.Add("Tick", "Test", costly)
+    hook.Run("Tick")
+    Check.equal(Ballast.hook_stats["Tick/Test"].calls, 1, "mesure reprise")
+end
+
+Check.case("réactivation derrière un autre addon", test_other_addon_enable)
 
 --- Une erreur dans un hook mesuré remonte telle quelle.
 local function test_error()

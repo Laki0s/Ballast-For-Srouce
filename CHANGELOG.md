@@ -20,3 +20,9 @@ Chaque version publiée indique les gains mesurés quand il y en a.
 - Commandes `ballast_status`, `ballast_hooks` et `ballast_hooks_reset`.
 - Vérificateur de style `tools/style_check.lua`, tests avec l'API GMod
   simulée et CI GitHub Actions.
+
+### Corrigé
+
+- Profiler de hooks : `ballast_debug 0` coupe les mesures même quand un
+  autre addon a remplacé `hook.Add` après Ballast, et `ballast_debug 1`
+  ne boucle plus à l'infini dans ce cas.
